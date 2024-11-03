@@ -19,6 +19,9 @@ phpMyAdmin
 ```
 http://heritage.localhost:8888
 ```
+| server                     | username | password                                    |
+|---------------------------|--------------|------------------------------------------|
+| db       | root          | root                             |
 
 # Initialisation : 
 Pour load les fixtures : 
