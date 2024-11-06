@@ -27,6 +27,10 @@ final readonly class BookController
 
     public function create() : void
     {
+        if (isset($_SESSION['user']) && in_array('user', $_SESSION['user']['roles'])) {
+            return;
+        }
+
         if (empty($_POST['title']) || empty($_POST['author']) || empty($_POST['pageNumber'])) {
             return;
         }
@@ -47,6 +51,10 @@ final readonly class BookController
 
     public function edit(int $id) : void
     {
+        if (isset($_SESSION['user']) && in_array('user', $_SESSION['user']['roles'])) {
+            return;
+        }
+
         $book = Book::getBookById($id);
         
         include "../src/view/books_edit.php";
@@ -54,6 +62,10 @@ final readonly class BookController
 
     public function update(int $id) : void
     {
+        if (isset($_SESSION['user']) && in_array('user', $_SESSION['user']['roles'])) {
+            return;
+        }
+
         $title = $_POST['title'];
         $author = $_POST['author'];
         $pageNumber = $_POST['pageNumber']; 
@@ -70,6 +82,10 @@ final readonly class BookController
 
     public function delete(int $id) : void
     {
+        if (isset($_SESSION['user']) && in_array('user', $_SESSION['user']['roles'])) {
+            return;
+        }
+
         $book = Book::getBookById($id);
         $book->delete();
         Router::redirect("books");
@@ -77,6 +93,10 @@ final readonly class BookController
 
     public function borrow(int $id) : void
     {
+        if (isset($_SESSION['user']) && in_array('user', $_SESSION['user']['roles'])) {
+            return;
+        }
+
         $book = Book::getBookById($id);
         $book->setAvailable(false);
         $book->save();
@@ -85,6 +105,10 @@ final readonly class BookController
 
     public function return(int $id) : void
     {
+        if (isset($_SESSION['user']) && in_array('user', $_SESSION['user']['roles'])) {
+            return;
+        }
+        
         $book = Book::getBookById($id);
         $book->setAvailable(true);
         $book->save();

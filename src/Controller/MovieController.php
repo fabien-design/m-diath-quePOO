@@ -25,6 +25,10 @@ final readonly class MovieController
 
     public function create() : void
     {
+        if (isset($_SESSION['user']) && in_array('user', $_SESSION['user']['roles'])) {
+            return;
+        }
+
         if (empty($_POST['title']) || empty($_POST['author']) || empty($_POST['duration']) || empty($_POST['genre'])) {
             return;
         }
@@ -50,6 +54,10 @@ final readonly class MovieController
 
     public function edit(int $id) : void
     {
+        if (isset($_SESSION['user']) && in_array('user', $_SESSION['user']['roles'])) {
+            return;
+        }
+
         $movie = Movie::getMovieById($id);
         
         include "../src/view/movies_edit.php";
@@ -57,6 +65,10 @@ final readonly class MovieController
 
     public function update(int $id) : void
     {
+        if (isset($_SESSION['user']) && in_array('user', $_SESSION['user']['roles'])) {
+            return;
+        }
+
         $id = intval($id);
         $title = $_POST['title'];
         $author = $_POST['author'];
@@ -75,6 +87,10 @@ final readonly class MovieController
 
     public function delete(int $id) : void
     {
+        if (isset($_SESSION['user']) && in_array('user', $_SESSION['user']['roles'])) {
+            return;
+        }
+
         $id = intval($id);
         $movie = Movie::getMovieById($id);
         $movie->delete();
@@ -91,6 +107,10 @@ final readonly class MovieController
 
     public function return(int $id) : void
     {
+        if (isset($_SESSION['user']) && in_array('user', $_SESSION['user']['roles'])) {
+            return;
+        }
+        
         $movie = Movie::getMovieById($id);
         $movie->setAvailable(true);
         $movie->save();

@@ -24,6 +24,10 @@ final readonly class AlbumController
 
     public function create() : void
     {
+        if (isset($_SESSION['user']) && in_array('user', $_SESSION['user']['roles'])) {
+            return;
+        }
+
         if (empty($_POST['title']) || empty($_POST['author']) || empty($_POST['songNumber']) || empty($_POST['editor'])) {
             return;
         }
@@ -45,6 +49,10 @@ final readonly class AlbumController
 
     public function edit(int $id) : void
     {
+        if (isset($_SESSION['user']) && in_array('user', $_SESSION['user']['roles'])) {
+            return;
+        }
+
         $album = Album::getAlbumById($id);
         
         include "../src/view/albums_edit.php";
@@ -52,6 +60,10 @@ final readonly class AlbumController
 
     public function update(int $id) : void
     {
+        if (isset($_SESSION['user']) && in_array('user', $_SESSION['user']['roles'])) {
+            return;
+        }
+
         $title = $_POST['title'] ?? '';
         $author = $_POST['author'] ?? '';
         $songNumber = $_POST['songNumber'] ?? 0;
@@ -77,6 +89,10 @@ final readonly class AlbumController
 
     public function borrow(int $id) : void
     {
+        if (isset($_SESSION['user']) && in_array('user', $_SESSION['user']['roles'])) {
+            return;
+        }
+
         $album = Album::getAlbumById($id);
         $album->setAvailable(false);
         $album->save();
@@ -85,6 +101,10 @@ final readonly class AlbumController
 
     public function return(int $id) : void
     {
+        if (isset($_SESSION['user']) && in_array('user', $_SESSION['user']['roles'])) {
+            return;
+        }
+        
         $album = Album::getAlbumById($id);
         $album->setAvailable(true);
         $album->save();

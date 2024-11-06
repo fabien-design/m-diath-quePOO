@@ -35,12 +35,15 @@ final readonly class HomeController
 
     public function loadFixtures() : void 
     {
-        
         include "../src/view/loadFixtures.php";
     }
 
     public function add() : void
     {
+        if (isset($_SESSION['user']) && in_array('user', $_SESSION['user']['roles'])) {
+            return;
+        }
+        
         include "../src/view/add.php";
     }
 
