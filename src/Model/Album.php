@@ -51,6 +51,11 @@ class Album extends Media {
         return $this;
     }
 
+    /**
+     * Generate fixtures
+     * 
+     * @return Album[]
+     */
     public static function generateFixtures() {
         $albums = [];
         $albums[] = new Album(null, "Album 1", "Auteur 1", true, 10, "Editor 1");
@@ -65,6 +70,11 @@ class Album extends Media {
         return $albums;
     }
 
+    /**
+     * Get all albums
+     * 
+     * @return Album[]
+     */
     public static function getAlbums() {
         $db = new Database();
         $connexion = $db->connect();
@@ -80,6 +90,12 @@ class Album extends Media {
         return $albums;
     }
 
+    /**
+     * Get a specific album by its ID
+     * 
+     * @param int $id
+     * @return Album
+     */
     public static function getAlbumById(int $id) {
         $db = new Database();
         $connexion = $db->connect();
@@ -90,6 +106,9 @@ class Album extends Media {
         return new Album($album['id'], $album['title'], $album['author'], $album['available'], $album['songNumber'], $album['editor']);
     }
 
+    /**
+     * Update an album
+     */
     public function save(): void {
         $id = $this->getId();
         $title = $this->getTitle();
@@ -115,6 +134,9 @@ class Album extends Media {
         }
     }
 
+    /**
+     * Delete an album
+     */
     public function delete(): void {
         $id = $this->getId();
         $db = new Database();
@@ -129,6 +151,9 @@ class Album extends Media {
         }
     }
 
+    /**
+     * add an album
+     */
     public function persist(): void {
         $title = $this->getTitle();
         $author = $this->getAuthor();

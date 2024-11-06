@@ -18,6 +18,11 @@ class Book extends Media {
         return $this;
     }
 
+    /**
+     * Generate fixtures
+     * 
+     * @return Book[]
+     */
     public static function generateFixtures() {
         $books = [];
         $books[] = new Book(null,"Harry Potter", "J.K. Rowling", true, 300);
@@ -33,6 +38,11 @@ class Book extends Media {
         return $books;
     }
 
+    /**
+     * Get all books
+     * 
+     * @return Book[]
+     */
     public static function getBooks() {
         $db = new Database();
         $connection = $db->connect();
@@ -48,6 +58,12 @@ class Book extends Media {
         return $books;
     }
 
+    /**
+     * Get a book by its ID
+     * 
+     * @param int $id
+     * @return Book
+     */
     public static function getBookById(int $id) {
         $db = new Database();
         $connection = $db->connect();
@@ -58,6 +74,9 @@ class Book extends Media {
         return new Book($book['id'], $book['title'], $book['author'], $book['available'], $book['pageNumber']);
     }
 
+    /**
+     * Update a book
+     */
     public function save(): void {
         $id = $this->getId();
         $title = $this->getTitle();
@@ -81,6 +100,9 @@ class Book extends Media {
         }
     }
 
+    /**
+     * Delete a book
+     */
     public function delete(): void {
         $id = $this->getId();
         $db = new Database();
@@ -95,6 +117,9 @@ class Book extends Media {
         }
     }
 
+    /**
+     * add a book
+     */
     public function persist(): void {
         $title = $this->getTitle();
         $author = $this->getAuthor();

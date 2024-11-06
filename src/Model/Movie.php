@@ -50,6 +50,11 @@ class Movie extends Media {
         return $this;
     }
 
+    /**
+     * Generate fixtures
+     * 
+     * @return Movie[]
+     */
     public static function generateFixtures() {
         $movies = [
             new Movie(null, "The Dark Knight", "Christopher Nolan", true, 152, GenreEnum::ACTION),
@@ -77,6 +82,11 @@ class Movie extends Media {
         return $movies;
     }
 
+    /**
+     * Get all movies
+     * 
+     * @return Movie[]
+     */
     public static function getMovies() {
         $db = new Database();
         $connexion = $db->connect();
@@ -93,6 +103,12 @@ class Movie extends Media {
         return $movies;
     }
 
+    /**
+     * Get a movie by its ID
+     * 
+     * @param int $id
+     * @return Movie
+     */
     public static function getMovieById(int $id) {
         $db = new Database();
         $connexion = $db->connect();
@@ -106,6 +122,9 @@ class Movie extends Media {
         return $movie;
     }
 
+    /**
+     * Update a movie
+     */
     public function save() {
         $id = $this->getId();
         $available = $this->getAvailable();  
@@ -128,6 +147,9 @@ class Movie extends Media {
         }
     }
 
+    /**
+     * Delete a movie
+     */
     public function delete() {
         $id = $this->getId();
         $db = new Database();
@@ -142,6 +164,9 @@ class Movie extends Media {
         }
     }
 
+    /**
+     * Add a movie
+     */ 
     public function persist() {
         $title = $this->getTitle();
         $author = $this->getAuthor();
