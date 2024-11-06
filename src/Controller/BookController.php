@@ -27,7 +27,8 @@ final readonly class BookController
 
     public function create() : void
     {
-        if (isset($_SESSION['user']) && !in_array('user', $_SESSION['user']['roles'])) {
+        if (!isset($_SESSION['user']) || isset($_SESSION['user']) && !in_array('user', $_SESSION['user']['roles'])) {
+            Router::redirect("books");
             return;
         }
 
@@ -51,7 +52,8 @@ final readonly class BookController
 
     public function edit(int $id) : void
     {
-        if (isset($_SESSION['user']) && !in_array('user', $_SESSION['user']['roles'])) {
+        if (!isset($_SESSION['user']) || isset($_SESSION['user']) && !in_array('user', $_SESSION['user']['roles'])) {
+            Router::redirect("books");
             return;
         }
 
@@ -62,7 +64,8 @@ final readonly class BookController
 
     public function update(int $id) : void
     {
-        if (isset($_SESSION['user']) && !in_array('user', $_SESSION['user']['roles'])) {
+        if (!isset($_SESSION['user']) || isset($_SESSION['user']) && !in_array('user', $_SESSION['user']['roles'])) {
+            Router::redirect("books");
             return;
         }
 
@@ -82,7 +85,8 @@ final readonly class BookController
 
     public function delete(int $id) : void
     {
-        if (isset($_SESSION['user']) && !in_array('user', $_SESSION['user']['roles'])) {
+        if (!isset($_SESSION['user']) || isset($_SESSION['user']) && !in_array('user', $_SESSION['user']['roles'])) {
+            Router::redirect("books");
             return;
         }
 
@@ -93,7 +97,8 @@ final readonly class BookController
 
     public function borrow(int $id) : void
     {
-        if (isset($_SESSION['user']) && !in_array('user', $_SESSION['user']['roles'])) {
+        if (!isset($_SESSION['user']) || isset($_SESSION['user']) && !in_array('user', $_SESSION['user']['roles'])) {
+            Router::redirect("books");
             return;
         }
 
@@ -105,7 +110,8 @@ final readonly class BookController
 
     public function return(int $id) : void
     {
-        if (isset($_SESSION['user']) && !in_array('user', $_SESSION['user']['roles'])) {
+        if (!isset($_SESSION['user']) || isset($_SESSION['user']) && !in_array('user', $_SESSION['user']['roles'])) {
+            Router::redirect("books");
             return;
         }
 

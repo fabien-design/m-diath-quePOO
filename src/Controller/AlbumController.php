@@ -24,7 +24,7 @@ final readonly class AlbumController
 
     public function create() : void
     {
-        if (isset($_SESSION['user']) && !in_array('user', $_SESSION['user']['roles'])) {
+        if (!isset($_SESSION['user']) || isset($_SESSION['user']) && !in_array('user', $_SESSION['user']['roles'])) {
             return;
         }
 
@@ -49,7 +49,8 @@ final readonly class AlbumController
 
     public function edit(int $id) : void
     {
-        if (isset($_SESSION['user']) && !in_array('user', $_SESSION['user']['roles'])) {
+        if (!isset($_SESSION['user']) || isset($_SESSION['user']) && !in_array('user', $_SESSION['user']['roles'])) {
+            Router::redirect("albums");
             return;
         }
 
@@ -60,7 +61,8 @@ final readonly class AlbumController
 
     public function update(int $id) : void
     {
-        if (isset($_SESSION['user']) && !in_array('user', $_SESSION['user']['roles'])) {
+        if (!isset($_SESSION['user']) || isset($_SESSION['user']) && !in_array('user', $_SESSION['user']['roles'])) {
+            Router::redirect("albums");
             return;
         }
 
@@ -82,6 +84,11 @@ final readonly class AlbumController
 
     public function delete(int $id) : void
     {
+        if (!isset($_SESSION['user']) || isset($_SESSION['user']) && !in_array('user', $_SESSION['user']['roles'])) {
+            Router::redirect("albums");
+            return;
+        }
+
         $album = Album::getAlbumById($id);
         $album->delete();
         Router::redirect("albums");
@@ -89,7 +96,8 @@ final readonly class AlbumController
 
     public function borrow(int $id) : void
     {
-        if (isset($_SESSION['user']) && !in_array('user', $_SESSION['user']['roles'])) {
+        if (!isset($_SESSION['user']) || isset($_SESSION['user']) && !in_array('user', $_SESSION['user']['roles'])) {
+            Router::redirect("albums");
             return;
         }
 
@@ -101,7 +109,8 @@ final readonly class AlbumController
 
     public function return(int $id) : void
     {
-        if (isset($_SESSION['user']) && !in_array('user', $_SESSION['user']['roles'])) {
+        if (!isset($_SESSION['user']) || isset($_SESSION['user']) && !in_array('user', $_SESSION['user']['roles'])) {
+            Router::redirect("albums");
             return;
         }
 
