@@ -25,7 +25,7 @@ final readonly class MovieController
 
     public function create() : void
     {
-        if (isset($_SESSION['user']) && in_array('user', $_SESSION['user']['roles'])) {
+        if (isset($_SESSION['user']) && !in_array('user', $_SESSION['user']['roles'])) {
             return;
         }
 
@@ -54,7 +54,7 @@ final readonly class MovieController
 
     public function edit(int $id) : void
     {
-        if (isset($_SESSION['user']) && in_array('user', $_SESSION['user']['roles'])) {
+        if (isset($_SESSION['user']) && !in_array('user', $_SESSION['user']['roles'])) {
             return;
         }
 
@@ -65,7 +65,7 @@ final readonly class MovieController
 
     public function update(int $id) : void
     {
-        if (isset($_SESSION['user']) && in_array('user', $_SESSION['user']['roles'])) {
+        if (isset($_SESSION['user']) && !in_array('user', $_SESSION['user']['roles'])) {
             return;
         }
 
@@ -87,7 +87,7 @@ final readonly class MovieController
 
     public function delete(int $id) : void
     {
-        if (isset($_SESSION['user']) && in_array('user', $_SESSION['user']['roles'])) {
+        if (isset($_SESSION['user']) && !in_array('user', $_SESSION['user']['roles'])) {
             return;
         }
 
@@ -107,10 +107,10 @@ final readonly class MovieController
 
     public function return(int $id) : void
     {
-        if (isset($_SESSION['user']) && in_array('user', $_SESSION['user']['roles'])) {
+        if (isset($_SESSION['user']) && !in_array('user', $_SESSION['user']['roles'])) {
             return;
         }
-        
+
         $movie = Movie::getMovieById($id);
         $movie->setAvailable(true);
         $movie->save();

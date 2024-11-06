@@ -40,10 +40,10 @@ final readonly class HomeController
 
     public function add() : void
     {
-        if (isset($_SESSION['user']) && in_array('user', $_SESSION['user']['roles'])) {
+        if (isset($_SESSION['user']) && !in_array('user', $_SESSION['user']['roles'])) {
             return;
         }
-        
+
         include "../src/view/add.php";
     }
 
