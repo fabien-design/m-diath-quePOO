@@ -13,7 +13,6 @@ final readonly class MovieController
     public function index() : void
     {
         $allMovies = Movie::getMovies();
-        
         include "../src/view/movies.php";
     }
 

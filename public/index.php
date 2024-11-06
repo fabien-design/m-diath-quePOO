@@ -8,6 +8,7 @@ use App\Router\Router;
 $router = new Router(isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '');
 
 $router->get("/", "App\Controller\HomeController@index", "welcome");
+$router->post('/', 'App\Controller\HomeController@index', 'searchMedias');
 $router->get('/loadFixtures', 'App\Controller\HomeController@loadFixtures', 'loadFixtures');
 
 // main routes

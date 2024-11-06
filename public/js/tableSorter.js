@@ -28,11 +28,17 @@ class TableSorter {
 
     initTableData() {
         this.tableContents.forEach((row) => {
-            const rowColumns = row.querySelectorAll("td");
-            let rowContent = {};
+            const tdColumns = row.querySelectorAll("td");   
+            const thColumns = row.querySelectorAll("th");
+            const rowColumns = [...thColumns, ...tdColumns];
+            let rowContent = {
+                rowClass: row.className // Store the class of the row
+            };
 
             Array.from(rowColumns).forEach((col, idx) => {
                 rowContent[this.headerColumnsName[idx]] = {
+                    tag: col.tagName,
+                    class: col.className,
                     html: col.innerHTML,
                     text: col.textContent.trim()
                 };
@@ -99,12 +105,15 @@ class TableSorter {
         this.tableBody.innerHTML = "";
         this.arrayContents.forEach((row) => {
             const tr = document.createElement("tr");
+            tr.className = row.rowClass;
             this.tableBody.appendChild(tr);
-
             Object.values(row).forEach((cell) => {
-                const td = document.createElement("td");
-                td.innerHTML = this.sanitizeHTML(cell.html);
-                tr.appendChild(td);
+                if(cell === row.rowClass) return;
+                const rowTag = cell.tag === "TH" ? "th" : "td";
+                const tag = document.createElement(rowTag);
+                tag.className = cell.class;
+                tag.innerHTML = this.sanitizeHTML(cell.html);
+                tr.appendChild(tag);
             });
         });
     }
